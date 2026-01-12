@@ -430,6 +430,7 @@ export default function TaskList() {
       updates.duration = parsedDuration;
     }
 
+    
     if (editIsRecurring !== selectedTask.isRecurring) {
       updates.isRecurring = editIsRecurring;
     }
