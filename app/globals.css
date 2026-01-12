@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0f14;
+  --foreground: #e2e8f0;
+  --surface-1: rgba(12, 17, 24, 0.82);
+  --surface-2: rgba(18, 25, 35, 0.72);
+  --border-soft: rgba(148, 163, 184, 0.22);
+  --accent: #60a5fa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sora);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b0f14;
+    --foreground: #e2e8f0;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/10 bg-slate-900/60 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl;
+  }
+
+  .glass-card {
+    @apply border border-white/10 bg-slate-900/50 shadow-[0_14px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl;
+  }
+
+  .input-field {
+    @apply rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-white placeholder:text-slate-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] focus:outline-none focus:ring-2 focus:ring-sky-500/40 focus:border-sky-400/40;
+  }
+
+  .button-primary {
+    @apply rounded-lg bg-gradient-to-b from-sky-400 to-blue-600 px-4 py-2 text-white shadow-[0_12px_30px_rgba(37,99,235,0.35)] transition-all hover:from-sky-300 hover:to-blue-500;
+  }
+
+  .button-secondary {
+    @apply rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-slate-200 transition-all hover:bg-white/10;
+  }
+
+  .button-ghost {
+    @apply rounded-lg border border-transparent px-3 py-1 text-slate-300 transition-all hover:border-white/10 hover:bg-white/5 hover:text-white;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs font-medium text-slate-200;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fade-up 0.6s ease both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.45s ease both;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
