@@ -430,11 +430,12 @@ export default function TaskList() {
       updates.duration = parsedDuration;
     }
 
-    
+
     if (editIsRecurring !== selectedTask.isRecurring) {
       updates.isRecurring = editIsRecurring;
     }
 
+    
     if (editIsRecurring && normalizedDueDate) {
       const selectedDate = new Date(normalizedDueDate + 'T00:00:00');
       const weekday = selectedDate.getDay();
