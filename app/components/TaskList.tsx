@@ -74,25 +74,25 @@ export default function TaskList() {
     return [...past.map(item => item.task), ...upcoming.map(item => item.task), ...undated];
   }, [tasks]);
 
-  const nextTaskId = useMemo(() => {
+  const nextTaskId = useMemo<number | null>(() => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const todayTime = today.getTime();
 
-    let next: { id: number; time: number } | null = null;
+    let nextId: number | null = null;
+    let nextTime = Number.POSITIVE_INFINITY;
     tasks.forEach((task) => {
       if (!task.dueDate || task.completed) return;
       const due = parseDueDate(task.dueDate);
       if (!due) return;
       const dueTime = due.getTime();
-      if (dueTime >= todayTime) {
-        if (!next || dueTime < next.time) {
-          next = { id: task.id, time: dueTime };
-        }
+      if (dueTime >= todayTime && dueTime < nextTime) {
+        nextTime = dueTime;
+        nextId = task.id;
       }
     });
 
-    return next?.id ?? null;
+    return nextId;
   }, [tasks]);
 
   useEffect(() => {
