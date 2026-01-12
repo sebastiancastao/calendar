@@ -20,7 +20,10 @@ export interface Task {
   deliverables?: Deliverable[];
 }
 
-export type TaskUpdates = Partial<Task> & {
+export type TaskUpdates = Omit<
+  Partial<Task>,
+  'dueDate' | 'duration' | 'recurringDay' | 'recurringWeekday' | 'recurringWeekOfMonth' | 'deliverables'
+> & {
   dueDate?: string | null;
   duration?: number | null;
   recurringDay?: number | null;
